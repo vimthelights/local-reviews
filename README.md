@@ -38,3 +38,131 @@ npm install -g webpack
 npm install
 ```
 
+## API:
+
+### Reviews:
+  * **GET** /api/:listingid/reviews
+    * _gets list of reviews pertaining to the listing id_
+    * req.params.listingid
+    * Response Data Shape:
+      ```javascript
+      [
+        {
+          "_id": "6019bdb8f325de38c1e57e00",
+          "username": "Connie Stoltenberg",
+          "thumbnail": "s3 image url",
+          "resident": false,
+          "type": "parents",
+          "posted": "2020-02-27T12:24:46.697Z",
+          "message": "There is so much outdoor space for kids here!",
+          "liked": 6,
+          "__v": 0
+        }, ...
+      ]
+      ```
+  * **POST** /api/:listingid/reviews
+    * _Will add a review to listing at the listingid_
+    * req.params.listingid
+    * req.body:
+      ```javascript
+      {
+        "username": "Remy Orans",
+        "thumbnail": "s3 image url",
+        "resident": true,
+        "type": "parents",
+        "posted": "2020-02-27T12:24:46.697Z",
+        "message": "This neighborhood is great!",
+        "liked": 7,
+        "__v": 0
+      }
+      ```
+  * **PATCH** /api/:listingid/reviews/:reviewid
+    * _Will update a review id at listing id with new values at columns_
+    * req.params.listingid and req.params.reviewid
+    * req.body:
+      ```javascript
+      {
+        "username": "Jake Berg",
+        "thumbnail": "s3 image url",
+        "resident": true,
+        "type": "commute",
+        "posted": "2020-02-28T12:16:46.697Z",
+      }
+      ```
+  * **DELETE** /api/:listingid/reviews/:reviewid
+    * _Will delete reviewid at listingid_
+    * req.params.listingid and req.params.reviewid
+
+
+### Features:
+  * **GET** /api/:listingid/features
+    * _gets list of features pertaining to the listing id_
+    * Response Shape:
+    ```javascript
+    [
+      {
+         "name": "dog",
+         "totalVotes" : 28,
+      }, ...
+    ]
+    ```
+  * **POST** /api/:listingid/features
+    * _Will add a feature to listing 1_
+    * req.params.listingid
+    * req.body:
+      ```javascript
+      {
+        "name": "grocery",
+        "totalVotes" : 1,
+      }, ...
+      ```
+  * **PATCH** /api/:listingid/features/:featureid
+    * _Will increment totalVotes for featureid at listingid_
+    * req.params.listingid and req.params.featureid
+
+  * **DELETE** /api/:listingid/features/:featureid
+    * _Will delete featureid at listingid_
+    * req.params.listingid and req.params.featureid
+
+
+### Users:
+  * **GET** /api/users
+    * _gets list of users_
+    * Response Shape:
+      ```javascript
+      [
+        {
+          "username": "oranznation",
+          "thumbnail": "image hosted at url",
+          "resident": true,
+        }, ...
+      ]
+      ```
+  * **POST** /api/users
+    * _Will add a new user to the users table_
+    * req.body:
+      ```javascript
+      {
+        "username": "jack_xia_ham",
+        "thumbnail": "image hosted at url",
+        "resident": false,
+      }
+      ```
+
+  * **PATCH** /api/users/:userid
+    * _Will essentially updates columns for userid sent in req.body to new values from req.body_
+    * req.params.userid
+    * req.body:
+    ```javascript
+      {
+        "resident": false,
+      }
+      ```
+
+  * **DELETE** /api/users/:userid
+    * _Will delete a user userid_
+    * req.params.userid
+
+
+
+
