@@ -6,11 +6,12 @@ const pool = new Client({
   password: 'Rem20769y',
   port: 5432,
 });
-client
-  .connect()
-  .then(() => console.log('connected to postgreSQL successfully!'))
-  .catch((e) => console.log(e))
+
+// pool
+//   .connect()
+//   .then(() => console.log('connected to postgreSQL successfully!'))
+//   .catch((e) => console.log(e))
 
 module.exports = {
-  client,
+  pool,
 };
