@@ -1,87 +1,47 @@
--- ---
--- Globals
--- ---
-
--- SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
--- SET FOREIGN_KEY_CHECKS=0;
-
--- ---
--- Table 'Reviews'
---
--- ---
-
-CREATE TABLE IF NOT EXISTS Reviews (
-  id SERIAL PRIMARY KEY,
-  type VARCHAR(20) NULL DEFAULT NULL,
-  posted DATE NULL DEFAULT NULL,
-  message VARCHAR NULL DEFAULT NULL,
-  liked SMALLINT NULL DEFAULT NULL,
-  id_Users INTEGER NULL DEFAULT NULL
+CREATE TABLE IF NOT EXISTS Users (
+  user_id SERIAL PRIMARY KEY,
+  password_ CHAR(30),
+  username CHAR(35),
+  thumbnail_url CHAR(103),
+  neighborhood_resident boolean,
+  email CHAR(45),
+  home_address CHAR(40),
+  city CHAR(50),
+  zip CHAR(10),
+  state_ CHAR(2),
+  country CHAR(50)
 );
-
--- ---
--- Table 'Listings'
---
--- ---
-
 
 CREATE TABLE IF NOT EXISTS Listings (
-  id SERIAL PRIMARY KEY,
-  id_Reviews INTEGER NULL DEFAULT NULL,
-  id_Features INTEGER NULL DEFAULT NULL
+  listing_id SERIAL PRIMARY KEY,
+  home_address CHAR(40),
+  city CHAR(50),
+  zip CHAR(10),
+  state_ CHAR(2),
+  country CHAR(50)
 );
-
--- ---
--- Table 'Users'
---
--- ---
-
-
-CREATE TABLE IF NOT EXISTS Users (
-  id SERIAL PRIMARY KEY,
-  username VARCHAR NULL DEFAULT NULL,
-  thumbnail VARCHAR NULL DEFAULT NULL,
-  resident bit NULL DEFAULT NULL
-);
-
--- ---
--- Table 'Features'
---
--- ---
-
 
 CREATE TABLE IF NOT EXISTS Features (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR NULL DEFAULT NULL,
-  totalVotes SMALLINT NULL DEFAULT NULL
+  feature_id SERIAL PRIMARY KEY,
+  feature_type CHAR(15),
+  total_votes SMALLINT,
+  id_listing INTEGER,
+  FOREIGN KEY (id_listing) REFERENCES Listings (listing_id) ON DELETE CASCADE
 );
 
--- ---
--- Foreign Keys
--- ---
+CREATE TABLE IF NOT EXISTS Reviews (
+  review_id SERIAL PRIMARY KEY,
+  category CHAR(20),
+  created_at TIMESTAMP,
+  message_body TEXT,
+  likes SMALLINT,
+  id_Users INTEGER,
+  id_Listing INTEGER,
+  FOREIGN KEY (id_Users) REFERENCES Users (user_id) ON DELETE CASCADE,
+  FOREIGN KEY (id_listing) REFERENCES Listings (listing_id) ON DELETE CASCADE
+);
 
-ALTER TABLE Reviews ADD FOREIGN KEY (id_Users) REFERENCES Users (id);
-ALTER TABLE Listings ADD FOREIGN KEY (id_Reviews) REFERENCES Reviews (id);
-ALTER TABLE Listings ADD FOREIGN KEY (id_Features) REFERENCES Features (id);
-
--- ---
--- Table Properties
--- ---
-
--- ALTER TABLE `Reviews` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `Listings` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `Users` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `Features` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ---
--- Test Data
--- ---
-
--- INSERT INTO `Reviews` (`id`,`type`,`posted`,`message`,`liked`,`id_Users`) VALUES
--- ('','','','','','');
--- INSERT INTO `Listings` (`id`,`id_Reviews`,`id_Features`) VALUES
--- ('','','');
--- INSERT INTO `Users` (`id`,`username`,`thumbnail`,`resident`) VALUES
--- ('','','','');
--- INSERT INTO `Features` (`id`,`name`,`totalVotes`) VALUES
--- ('','','');
+COPY USERS(password_, username, thumbnail_url, neighborhood_resident, email, home_address, city, zip, state_, country) FROM '/Users/remyorans/hackreactor/sdc/Local-Review/users.csv' DELIMITER ',';
+COPY LISTINGS(home_address, city, zip, state_, country) FROM '/Users/remyorans/hackreactor/sdc/Local-Review/listings.csv' DELIMITER ',';
+COPY REVIEWS(category, created_at, message_body, likes, id_Users, id_Listing) FROM '/Users/remyorans/hackreactor/sdc/Local-Review/reviews.csv' DELIMITER ',';
+COPY FEATURES(feature_type, total_votes, id_Listing) FROM '/Users/remyorans/hackreactor/sdc/Local-Review/features.csv' DELIMITER ',';

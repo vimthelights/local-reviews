@@ -24,3 +24,5 @@ lib-cov
 build/
 dist/
 
+# database seeding files
+csv

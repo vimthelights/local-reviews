@@ -41,14 +41,14 @@ npm install
 ## API:
 
 ### Reviews:
-  * **GET** /api/:listingid/reviews
+  * **GET** /api/reviews/:listingid
     * _gets list of reviews pertaining to the listing id_
     * req.params.listingid
     * Response Data Shape:
       ```javascript
       [
         {
-          "_id": "6019bdb8f325de38c1e57e00",
+          "id": 1,
           "username": "Connie Stoltenberg",
           "thumbnail": "s3 image url",
           "resident": false,
@@ -60,7 +60,7 @@ npm install
         }, ...
       ]
       ```
-  * **POST** /api/:listingid/reviews
+  * **POST** /api/reviews/:listingid
     * _Will add a review to listing at the listingid_
     * req.params.listingid
     * req.body:
@@ -76,7 +76,7 @@ npm install
         "__v": 0
       }
       ```
-  * **PATCH** /api/:listingid/reviews/:reviewid
+  * **PATCH** /api/reviews/:reviewid
     * _Will update a review id at listing id with new values at columns_
     * req.params.listingid and req.params.reviewid
     * req.body:
@@ -89,7 +89,7 @@ npm install
         "posted": "2020-02-28T12:16:46.697Z",
       }
       ```
-  * **DELETE** /api/:listingid/reviews/:reviewid
+  * **DELETE** /api/reviews/:reviewid
     * _Will delete reviewid at listingid_
     * req.params.listingid and req.params.reviewid
 
@@ -114,7 +114,7 @@ npm install
       {
         "name": "grocery",
         "totalVotes" : 1,
-      }, ...
+      }
       ```
   * **PATCH** /api/:listingid/features/:featureid
     * _Will increment totalVotes for featureid at listingid_
