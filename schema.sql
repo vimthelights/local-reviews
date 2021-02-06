@@ -35,13 +35,13 @@ CREATE TABLE IF NOT EXISTS Reviews (
   created_at TIMESTAMP,
   message_body TEXT,
   likes SMALLINT,
-  id_Users INTEGER,
-  id_Listing INTEGER,
-  FOREIGN KEY (id_Users) REFERENCES Users (user_id) ON DELETE CASCADE,
+  id_users INTEGER,
+  id_listing INTEGER,
+  FOREIGN KEY (id_users) REFERENCES Users (user_id) ON DELETE CASCADE,
   FOREIGN KEY (id_listing) REFERENCES Listings (listing_id) ON DELETE CASCADE
 );
 
-COPY USERS(password_, username, thumbnail_url, neighborhood_resident, email, home_address, city, zip, state_, country) FROM '/Users/remyorans/hackreactor/sdc/Local-Review/users.csv' DELIMITER ',';
-COPY LISTINGS(home_address, city, zip, state_, country) FROM '/Users/remyorans/hackreactor/sdc/Local-Review/listings.csv' DELIMITER ',';
-COPY REVIEWS(category, created_at, message_body, likes, id_Users, id_Listing) FROM '/Users/remyorans/hackreactor/sdc/Local-Review/reviews.csv' DELIMITER ',';
-COPY FEATURES(feature_type, total_votes, id_Listing) FROM '/Users/remyorans/hackreactor/sdc/Local-Review/features.csv' DELIMITER ',';
+COPY USERS(password_, username, thumbnail_url, neighborhood_resident, email, home_address, city, zip, state_, country) FROM '/Users/remyorans/hackreactor/sdc/Local-Review/csv/users.csv' DELIMITER ',';
+COPY LISTINGS(home_address, city, zip, state_, country) FROM '/Users/remyorans/hackreactor/sdc/Local-Review/csv/listings.csv' DELIMITER ',';
+COPY REVIEWS(category, created_at, message_body, likes, id_Users, id_Listing) FROM '/Users/remyorans/hackreactor/sdc/Local-Review/csv/reviews.csv' DELIMITER ',';
+COPY FEATURES(feature_type, total_votes, id_Listing) FROM '/Users/remyorans/hackreactor/sdc/Local-Review/csv/features.csv' DELIMITER ',';

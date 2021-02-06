@@ -41,8 +41,8 @@ for (let i = 0; i < userCap * 10; i += 1) {
   now.add(Math.floor(Math.random() * 4), 's');
   reviewValues.push(faker.lorem.sentences(faker.random.number(4) + 1));
   reviewValues.push(faker.random.number(100) + 1);
-  reviewValues.push(faker.random.number(599999) + 1);
-  reviewValues.push(faker.random.number(239999) + 1);
+  reviewValues.push(faker.random.number(userCap - 1) + 1);
+  reviewValues.push(faker.random.number((userCap * 10 / 25) - 1) + 1);
   let csvRow = reviewValues.join(',') + '\n';
   if (i === (userCap * 10) - 1) {
     writeReviewCSV.write(csvRow, encoding, () => writeReviewCSV.end());
