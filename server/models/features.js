@@ -1,16 +1,41 @@
-const client = require('../../database');
+const db = require('../../database');
 
 module.exports = {
-  get: (cb) => {
-
+  get: (featureid, cb) => {
+    db.query(`SELECT * from features where feature_id = ${featureid}`, (err, results) => {
+      if (err) {
+        cb(err);
+      } else {
+        cb(null, results);
+      }
+    });
   },
-  post: (data, cb) => {
-
+  post: ({name, total_votes}, listingid, cb) => {
+    const vals = [name, total_votes, listingid];
+    pool.query('INSERT INTO features (name, total_votes, id_listing) VALUES($1, $2, $3)', vals, (err, results) => {
+      if (err) {
+        cb(err);
+      } else {
+        cb(null, results);
+      }
+    });
   },
-  patch: (data, cb) => {
-
+  patch: (data, featureid, cb) => {
+    patch(data, 'features', featureid, (err, results) => {
+      if (err) {
+        cb(err);
+      } else {
+        cb(null, results);
+      }
+    });
   },
-  remove: (cb) => {
-
+  remove: (featureid, cb) => {
+    pool.query('DELETE FROM Features WHERE feature_id = $1' , [featureid], (err, results) => {
+      if (err) {
+        cb(err);
+      } else {
+        cb(null, results);
+      }
+    });
   }
 };

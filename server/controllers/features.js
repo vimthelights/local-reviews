@@ -4,7 +4,8 @@ const { get, post, patch, remove } = require('../models/features.js');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  get((err, results) => {
+  const { listingid } = req;
+  get(listingid, (err, results) => {
     if (err) {
       res.status(404).send(err);
     } else {
