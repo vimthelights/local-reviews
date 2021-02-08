@@ -11,8 +11,9 @@ module.exports = {
     });
   },
 
-  post: ({category, created_at, message_body, likes, id_users, id_listing }, listingId, cb) => {
-    const vals = [category, created_at, message_body, likes, id_users, listingId];
+  post: ({category, created_at, message_body, likes, id_users }, listingid, cb) => {
+    const vals = [category, created_at, message_body, likes, id_users, listingid];
+    console.log(vals);
     pool.query('INSERT INTO reviews(category, created_at, message_body, likes, id_Users, id_Listing) VALUES($1, $2, $3, $4, $5, $6)', vals, (err, results) => {
       if (err) {
         cb(err);

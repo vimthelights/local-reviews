@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+require('newrelic');
+
 const reviewsRouter = require('./controllers/reviews.js');
 const userRouter = require('./controllers/users.js');
 const featuresRouter = require('./controllers/features.js');

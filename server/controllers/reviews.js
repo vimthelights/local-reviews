@@ -14,8 +14,8 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const { listingId } = req.params;
-  post(req.body, listingId, (err, results) => {
+  const { listingid } = req;
+  post(req.body, listingid, (err, results) => {
     if (err) {
       res.status(404).send(err);
     } else {

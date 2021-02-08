@@ -15,11 +15,12 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  post(req.body, (err, results) => {
+  const { listingid } = req;
+  post(req.body, listingid, (err, results) => {
     if (err) {
       res.status(404).send(err);
     } else {
-      res.status(201).send(results);
+      res.status(201).send();
     }
   });
 });
@@ -30,18 +31,20 @@ router.patch('/:featureid', (req, res) => {
     if (err) {
       res.status(404).send(err);
     } else {
-      res.status(201).send(results);
+      res.status(201).send();
     }
   });
 });
 
-router.remove('/:featureid', (req, res) => {
+router.delete('/:featureid', (req, res) => {
   const { featureid } = req.params;
   remove(featureid, (err, results) => {
     if (err) {
       res.status(404).send(err);
     } else {
-      res.status(204).send(results);
+      res.status(204).send();
     }
   });
 });
+
+module.exports = router;

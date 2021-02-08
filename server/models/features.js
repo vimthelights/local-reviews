@@ -1,18 +1,19 @@
-const db = require('../../database');
+const {pool, patch} = require('../../database');
 
 module.exports = {
-  get: (featureid, cb) => {
-    db.query(`SELECT * from features where feature_id = ${featureid}`, (err, results) => {
+  get: (listingid, cb) => {
+    pool.query(`SELECT * from features where id_listing = ${listingid}`, (err, {rows}) => {
       if (err) {
         cb(err);
       } else {
-        cb(null, results);
+        cb(null, rows);
       }
     });
   },
-  post: ({name, total_votes}, listingid, cb) => {
-    const vals = [name, total_votes, listingid];
-    pool.query('INSERT INTO features (name, total_votes, id_listing) VALUES($1, $2, $3)', vals, (err, results) => {
+  post: ({feature_type, total_votes}, listingid, cb) => {
+    const vals = [feature_type, total_votes, listingid];
+    console.log(vals);
+    pool.query('INSERT INTO features (feature_type, total_votes, id_listing) VALUES($1, $2, $3)', vals, (err, results) => {
       if (err) {
         cb(err);
       } else {
