@@ -15,7 +15,7 @@ export let options = {
 
 export default function () {
   const BASE_URL = 'http://localhost:3000';
-  const listingid = Math.floor(Math.random()*400000) + 1;
+  const listingid = Math.floor(Math.random()*399999) + 1;
   let responses = http.batch([
     [
       'GET',
