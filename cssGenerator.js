@@ -34,6 +34,7 @@ const categories = ['community', 'dogOwners', 'parents', 'commute'];
 let now = moment();
 now = now.subtract(3, 'M');
 const writeReviewCSV = fs.createWriteStream('csv/reviews.csv');
+
 for (let i = 0; i < userCap * 10; i += 1) {
   let reviewValues = [];
   reviewValues.push(categories[faker.random.number(3)]);
@@ -41,8 +42,9 @@ for (let i = 0; i < userCap * 10; i += 1) {
   now.add(Math.floor(Math.random() * 4), 's');
   reviewValues.push(faker.lorem.sentences(faker.random.number(4) + 1));
   reviewValues.push(faker.random.number(100) + 1);
-  reviewValues.push(faker.random.number(599999) + 1);
-  reviewValues.push(faker.random.number(239999) + 1);
+  reviewValues.push(faker.random.number(userCap - 1) + 1);
+  const id_listing = faker.random.number((userCap * 10 / 25) - 1) + 1
+  reviewValues.push(id_listing); // id_listing
   let csvRow = reviewValues.join(',') + '\n';
   if (i === (userCap * 10) - 1) {
     writeReviewCSV.write(csvRow, encoding, () => writeReviewCSV.end());
@@ -54,12 +56,14 @@ for (let i = 0; i < userCap * 10; i += 1) {
 const featureCap = userCap * 10 / 25 * 16;
 const featureNames = ['dog', 'sidewalk', 'restaurant', 'cart', 'moon', 'streetlight', 'play', 'holiday', 'neighbors', 'quiet', 'hourglass', 'parking', 'car', 'wildlife', 'yarn', 'events'];
 const writeFeatureCSV = fs.createWriteStream('csv/features.csv');
+
 let featureCount = 0;
 for (let i = 0; i < featureCap; i += 1) {
   let featureValues = [];
   featureValues.push(featureNames[featureCount]);
   featureValues.push(faker.random.number(129) + 1);
-  featureValues.push(Math.floor(i/16) + 1);
+  const id_listing = Math.floor(i/16) + 1;
+  featureValues.push(id_listing);
   let csvRow = featureValues.join(',') + '\n';
   if (i === featureCap - 1) {
     writeFeatureCSV.write(csvRow, encoding, () => writeFeatureCSV.end());
@@ -70,7 +74,6 @@ for (let i = 0; i < featureCap; i += 1) {
   if (featureCount === 15) {
     featureCount = 0;
   }
-
 }
 
 const listingCap = userCap * 10 / 25;

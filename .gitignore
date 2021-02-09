@@ -26,3 +26,9 @@ dist/
 
 # database seeding files
 csv
+
+# new relic
+newrelic.js
+
+# clinic
+.clinic
