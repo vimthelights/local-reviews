@@ -8,7 +8,7 @@ router.get('/:userid', (req, res) => {
   const { userid } = req.params;
   get(userid, (err, results) => {
     if (err) {
-      res.status(404).send(err);
+      res.sendStatus(500);
     } else {
       res.status(200).send(results);
     }
@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
   console.log('in post');
   post(req.body, (err, results) => {
     if (err) {
-      res.status(404).send(err);
+      res.sendStatus(500);
     } else {
       res.status(201).send();
     }
@@ -31,7 +31,7 @@ router.patch('/:userid', (req, res) => {
   console.log(req.body);
   patch(req.body, userid, (err, results) => {
     if (err) {
-      res.status(404).send(err);
+      res.sendStatus(500);
     } else {
       res.status(201).send();
     }
@@ -43,7 +43,7 @@ router.delete('/:userid', (req, res) => {
   console.log(userid);
   remove(userid, (err, results) => {
     if (err) {
-      res.status(404).send(err);
+      res.sendStatus(500);
     } else {
       res.status(204).send();
     }

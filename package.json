@@ -13,7 +13,7 @@
     "watch": "webpack -w",
     "lint": "eslint ./",
     "seed": "node seed.js",
-    "docker-start": "node seed.js & webpack & node server"
+    "docker-start": "node server"
   },
   "dependencies": {
     "@babel/core": "^7.12.10",
@@ -26,6 +26,7 @@
     "babel-plugin-styled-components": "^1.12.0",
     "body-parser": "^1.19.0",
     "clinic": "^8.0.1",
+    "compression": "^1.7.4",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "faker": "^5.1.0",

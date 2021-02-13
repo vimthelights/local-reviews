@@ -41,8 +41,11 @@ CREATE TABLE IF NOT EXISTS reviews (
   FOREIGN KEY (id_listing) REFERENCES listings (listing_id) ON DELETE CASCADE
 );
 
-COPY users(password_, username, thumbnail_url, neighborhood_resident, email, home_address, city, zip, state_, country) FROM '/Users/remyorans/hackreactor/sdc/Local-Review/csv/users.csv' DELIMITER ',';
-COPY listings(home_address, city, zip, state_, country) FROM '/Users/remyorans/hackreactor/sdc/Local-Review/csv/listings.csv' DELIMITER ',';
-COPY reviews(category, created_at, message_body, likes, id_Users, id_Listing) FROM '/Users/remyorans/hackreactor/sdc/Local-Review/csv/reviews.csv' DELIMITER ',';
-COPY features(feature_type, total_votes, id_listing) FROM '/Users/remyorans/hackreactor/sdc/Local-Review/csv/features.csv' DELIMITER ',';
+COPY users(password_, username, thumbnail_url, neighborhood_resident, email, home_address, city, zip, state_, country) FROM '/csv/users.csv' DELIMITER ',';
+COPY listings(home_address, city, zip, state_, country) FROM '/csv/listings.csv' DELIMITER ',';
+COPY reviews(category, created_at, message_body, likes, id_user, id_Listing) FROM '/csv/reviews.csv' DELIMITER ',';
+COPY features(feature_type, total_votes, id_listing) FROM '/csv/features.csv' DELIMITER ',';
 
+CREATE INDEX ON reviews(id_listing);
+CREATE INDEX ON reviews(id_user);
+CREATE INDEX ON features(id_listing);
