@@ -32,3 +32,6 @@ newrelic.js
 
 # clinic
 .clinic
+
+#
+docker-compose.yml

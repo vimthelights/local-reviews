@@ -10,8 +10,8 @@ export let options = {
     { duration: '2m', target: 1500 },
     { duration: '2m', target: 500 },
     { duration: '2m', target: 100 },
-  ]
-}
+  ],
+};
 
 export default function () {
   const BASE_URL = 'http://localhost:3000';

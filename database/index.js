@@ -2,9 +2,12 @@ const { Pool, Client } = require('pg');
 
 const pool = new Pool({
   database: 'reviews',
-  user: 'remyorans',
+  host: '34.221.250.12',
+  user: 'postgres',
+  password: 'postgres',
   port: 5432,
 });
+pool.connect();
 
 const idNames = {
   reviews: 'review_id',

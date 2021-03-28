@@ -7,9 +7,9 @@ const moment = require('moment');
 // 400000 listings
 // 6400000 features
 
-const writeUserCSV = fs.createWriteStream('csv/users.csv');
+const writeUserCSV = fs.createWriteStream('csv1/users.csv');
 const encoding = 'utf8';
-const userCap = 1000000;
+const userCap = 400000;
 for (let i = 0; i < userCap; i += 1) {
   let userValues = [];
   userValues.push(faker.internet.password());
@@ -33,7 +33,7 @@ for (let i = 0; i < userCap; i += 1) {
 const categories = ['community', 'dogOwners', 'parents', 'commute'];
 let now = moment();
 now = now.subtract(3, 'M');
-const writeReviewCSV = fs.createWriteStream('csv/reviews.csv');
+const writeReviewCSV = fs.createWriteStream('csv1/reviews.csv');
 
 for (let i = 0; i < userCap * 10; i += 1) {
   let reviewValues = [];
@@ -55,7 +55,7 @@ for (let i = 0; i < userCap * 10; i += 1) {
 
 const featureCap = userCap * 10 / 25 * 16;
 const featureNames = ['dog', 'sidewalk', 'restaurant', 'cart', 'moon', 'streetlight', 'play', 'holiday', 'neighbors', 'quiet', 'hourglass', 'parking', 'car', 'wildlife', 'yarn', 'events'];
-const writeFeatureCSV = fs.createWriteStream('csv/features.csv');
+const writeFeatureCSV = fs.createWriteStream('csv1/features.csv');
 
 let featureCount = 0;
 for (let i = 0; i < featureCap; i += 1) {
@@ -77,7 +77,7 @@ for (let i = 0; i < featureCap; i += 1) {
 }
 
 const listingCap = userCap * 10 / 25;
-const writeListingCSV = fs.createWriteStream('csv/listings.csv');
+const writeListingCSV = fs.createWriteStream('csv1/listings.csv');
 for (let i = 0; i < listingCap; i += 1) {
   let listingValues = [];
   listingValues.push(faker.address.streetAddress());
