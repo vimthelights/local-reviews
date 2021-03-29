@@ -7,9 +7,9 @@ const moment = require('moment');
 // 400000 listings
 // 6400000 features
 
-const writeUserCSV = fs.createWriteStream('csv1/users.csv');
+const writeUserCSV = fs.createWriteStream('csv/users.csv');
 const encoding = 'utf8';
-const userCap = 400000;
+const userCap = 1000000;
 for (let i = 0; i < userCap; i += 1) {
   let userValues = [];
   userValues.push(faker.internet.password());
@@ -33,14 +33,14 @@ for (let i = 0; i < userCap; i += 1) {
 const categories = ['community', 'dogOwners', 'parents', 'commute'];
 let now = moment();
 now = now.subtract(3, 'M');
-const writeReviewCSV = fs.createWriteStream('csv1/reviews.csv');
+const writeReviewCSV = fs.createWriteStream('csv/reviews.csv');
 
 for (let i = 0; i < userCap * 10; i += 1) {
   let reviewValues = [];
   reviewValues.push(categories[faker.random.number(3)]);
   reviewValues.push(now.toISOString());
   now.add(Math.floor(Math.random() * 4), 's');
-  reviewValues.push(faker.lorem.sentences(faker.random.number(4) + 1));
+  reviewValues.push(faker.lorem.sentences(faker.random.number(2) + 1));
   reviewValues.push(faker.random.number(100) + 1);
   reviewValues.push(faker.random.number(userCap - 1) + 1);
   const id_listing = faker.random.number((userCap * 10 / 25) - 1) + 1
@@ -49,13 +49,14 @@ for (let i = 0; i < userCap * 10; i += 1) {
   if (i === (userCap * 10) - 1) {
     writeReviewCSV.write(csvRow, encoding, () => writeReviewCSV.end());
   } else {
+    if (i % 100000 === 0) console.log('writing review');
     writeReviewCSV.write(csvRow, encoding);
   }
 }
 
 const featureCap = userCap * 10 / 25 * 16;
 const featureNames = ['dog', 'sidewalk', 'restaurant', 'cart', 'moon', 'streetlight', 'play', 'holiday', 'neighbors', 'quiet', 'hourglass', 'parking', 'car', 'wildlife', 'yarn', 'events'];
-const writeFeatureCSV = fs.createWriteStream('csv1/features.csv');
+const writeFeatureCSV = fs.createWriteStream('csv/features.csv');
 
 let featureCount = 0;
 for (let i = 0; i < featureCap; i += 1) {
@@ -77,7 +78,7 @@ for (let i = 0; i < featureCap; i += 1) {
 }
 
 const listingCap = userCap * 10 / 25;
-const writeListingCSV = fs.createWriteStream('csv1/listings.csv');
+const writeListingCSV = fs.createWriteStream('csv/listings.csv');
 for (let i = 0; i < listingCap; i += 1) {
   let listingValues = [];
   listingValues.push(faker.address.streetAddress());

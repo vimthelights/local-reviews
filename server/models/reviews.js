@@ -43,18 +43,3 @@ module.exports = {
     });
   }
 };
-
-// router.get('/:id', async (req, res) => {
-//   const { id } = req.params
-//   const { rows } = await db.query('SELECT * FROM users WHERE id = $1', [id])
-//   res.send(rows[0])
-// })
-
-// category CHAR(20),
-//   created_at TIMESTAMP,
-//   message_body TEXT,
-//   likes SMALLINT,
-//   id_Users INTEGER,
-//   id_Listing INTEGER,
-//   FOREIGN KEY (id_Users) REFERENCES Users (user_id) ON DELETE CASCADE,
-//   FOREIGN KEY (id_listing) REFERENCES Listings (listing_id) ON DELETE CASCADE

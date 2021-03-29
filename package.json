@@ -12,7 +12,6 @@
     "test": "jest --coverage",
     "watch": "webpack -w",
     "lint": "eslint ./",
-    "seed": "node seed.js",
     "docker-start": "node server"
   },
   "dependencies": {
@@ -32,7 +31,7 @@
     "faker": "^5.1.0",
     "moment": "^2.29.1",
     "mongoose": "^5.11.11",
-    "newrelic": "^7.1.1",
+    "newrelic": "^7.2.0",
     "nodemon": "^2.0.7",
     "pg": "^8.5.1",
     "react": "^17.0.1",
